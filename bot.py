@@ -207,7 +207,7 @@ async def session(interaction: discord.Interaction):
 
 
 
-bot.run(TOKEN)
+
 @bot.tree.command(
     name="giveaway",
     description="Create a giveaway"
@@ -263,3 +263,148 @@ async def giveaway(
     await interaction.response.send_message(
         embed=embed
     )
+@bot.tree.command(
+    name="kick",
+    description="Kick a member"
+)
+@app_commands.describe(
+    user="User to kick",
+    reason="Reason"
+)
+async def kick(
+    interaction: discord.Interaction,
+    user: discord.Member,
+    reason: str = "No reason provided"
+):
+
+    if not has_staff_role(interaction):
+        return await interaction.response.send_message(
+            "❌ No permission.",
+            ephemeral=True
+        )
+
+
+    await user.kick(reason=reason)
+
+
+    embed = discord.Embed(
+        title="👢 User Kicked",
+        color=0xff0000
+    )
+
+    embed.add_field(
+        name="User",
+        value=user.mention
+    )
+
+    embed.add_field(
+        name="Moderator",
+        value=interaction.user.mention
+    )
+
+    embed.add_field(
+        name="Reason",
+        value=reason
+    )
+
+
+    await interaction.response.send_message(
+        embed=embed
+    ) 
+@bot.tree.command(
+    name="ban",
+    description="Ban a member"
+)
+@app_commands.describe(
+    user="User to ban",
+    reason="Reason"
+)
+async def ban(
+    interaction: discord.Interaction,
+    user: discord.Member,
+    reason: str = "No reason provided"
+):
+
+    if not has_staff_role(interaction):
+        return await interaction.response.send_message(
+            "❌ No permission.",
+            ephemeral=True
+        )
+
+
+    await user.ban(reason=reason)
+
+
+    embed = discord.Embed(
+        title="🔨 User Banned",
+        color=0xff0000
+    )
+
+    embed.add_field(
+        name="User",
+        value=user.mention
+    )
+
+    embed.add_field(
+        name="Moderator",
+        value=interaction.user.mention
+    )
+
+    embed.add_field(
+        name="Reason",
+        value=reason
+    )
+
+
+    await interaction.response.send_message(
+        embed=embed
+    ) 
+@bot.tree.command(
+    name="role",
+    description="Give a role to a user"
+)
+@app_commands.describe(
+    user="User",
+    role="Role to give"
+)
+async def role(
+    interaction: discord.Interaction,
+    user: discord.Member,
+    role: discord.Role
+):
+
+    if not has_staff_role(interaction):
+        return await interaction.response.send_message(
+            "❌ No permission.",
+            ephemeral=True
+        )
+
+
+    await user.add_roles(role)
+
+
+    embed = discord.Embed(
+        title="✅ Role Added",
+        color=0x00ff00
+    )
+
+    embed.add_field(
+        name="User",
+        value=user.mention
+    )
+
+    embed.add_field(
+        name="Role",
+        value=role.mention
+    )
+
+    embed.add_field(
+        name="Given By",
+        value=interaction.user.mention
+    )
+
+
+    await interaction.response.send_message(
+        embed=embed
+    )
+    bot.run(TOKEN)
