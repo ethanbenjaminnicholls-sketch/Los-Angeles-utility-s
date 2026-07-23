@@ -10,19 +10,30 @@ TOKEN = os.getenv("TOKEN")
 
 VERIFY_ROLE = 1484208135299272828
 STAFF_ROLE = 1480241245367308355
+SESSION_CHANNEL = 1480241245312778466
 
-SESSION_CHANNEL = 1480256695589666917
 
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 
-bot = commands.Bot(
+
+class LARPPBot(commands.Bot):
+
+    async def setup_hook(self):
+        await self.tree.sync()
+        print("Slash commands synced")
+
+
+bot = LARPPBot(
     command_prefix="!",
     intents=intents
 )
 
 
+@bot.event
+async def on_ready():
+    print(f"Logged in as {bot.user}")
 # ---------------- START ----------------
 
 @bot.event
