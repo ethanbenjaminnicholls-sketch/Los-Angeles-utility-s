@@ -118,28 +118,19 @@ async def verify(interaction: discord.Interaction):
 
 # ---------------- SESSION ----------------
 
-
 class JoinServer(discord.ui.View):
 
     def __init__(self):
         super().__init__(timeout=None)
 
-
-    @discord.ui.button(
-        label="Join Server",
-        style=discord.ButtonStyle.link,
-        url="https://erlc.gg/LARPPp",
-        emoji="🎮"
-    )
-    async def join(
-        self,
-        interaction,
-        button
-    ):
-        pass
-
-
-
+        self.add_item(
+            discord.ui.Button(
+                label="Join Server",
+                style=discord.ButtonStyle.link,
+                url="https://erlc.gg/LARPPp",
+                emoji="🎮"
+            )
+        )
 @bot.tree.command(
     name="session",
     description="Start a roleplay session"
