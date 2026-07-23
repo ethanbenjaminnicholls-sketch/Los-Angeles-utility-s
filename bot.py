@@ -7,7 +7,7 @@ from datetime import datetime
 import os
 
 # ─── CONFIG ───────────────────────────────────────────────
-DISCORD_TOKEN      = os.environ["DISCORD_TOKEN"]
+DISCORD_TOKEN      = os.environ["MTUyOTY0OTg0NjA3MDI4NDM1OQ.GlnUZm.vyGdZvve2jFaW4J8zxqArmCvn47OWVjXRKgUk8"]
 
 # Verify
 VERIFY_CHANNEL_ID  = 1527458422138736660
