@@ -208,3 +208,58 @@ async def session(interaction: discord.Interaction):
 
 
 bot.run(TOKEN)
+@bot.tree.command(
+    name="giveaway",
+    description="Create a giveaway"
+)
+@app_commands.describe(
+    prize="Giveaway prize",
+    winners="Number of winners",
+    time="Giveaway time"
+)
+async def giveaway(
+    interaction: discord.Interaction,
+    prize: str,
+    winners: int,
+    time: str
+):
+
+    if not has_staff_role(interaction):
+        await interaction.response.send_message(
+            "❌ You do not have permission.",
+            ephemeral=True
+        )
+        return
+
+
+    embed = discord.Embed(
+        title="🎉 Giveaway",
+        color=0xffd700
+    )
+
+    embed.add_field(
+        name="Prize:",
+        value=prize,
+        inline=False
+    )
+
+    embed.add_field(
+        name="Winners:",
+        value=str(winners),
+        inline=False
+    )
+
+    embed.add_field(
+        name="Time:",
+        value=time,
+        inline=False
+    )
+
+    embed.set_footer(
+        text="Los Angeles State Roleplay Giveaway"
+    )
+
+
+    await interaction.response.send_message(
+        embed=embed
+    )
