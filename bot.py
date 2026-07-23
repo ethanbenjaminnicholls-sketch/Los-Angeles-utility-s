@@ -410,4 +410,33 @@ async def role(
         embed=embed
     )
 
+    @bot.tree.error
+async def command_error(
+    interaction: discord.Interaction,
+    error
+):
+
+    print(error)
+
+    try:
+        if interaction.response.is_done():
+            await interaction.followup.send(
+                "❌ Something went wrong.",
+                ephemeral=True
+            )
+        else:
+            await interaction.response.send_message(
+                "❌ Something went wrong.",
+                ephemeral=True
+            )
+
+    except:
+        pass
+
+
+
+
+
+
+    
     bot.run(TOKEN)
